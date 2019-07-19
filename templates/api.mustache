@@ -10,6 +10,7 @@ using RestSharp.Portable;
 using RestSharp;
 {{/netStandard}}
 using {{packageName}}.Client;
+using {{packageName}}.Utilities;
 {{#hasImport}}using {{packageName}}.{{modelPackage}};
 {{/hasImport}}
 
@@ -90,7 +91,7 @@ namespace {{packageName}}.{{apiPackage}}
         {
             this.Configuration = new {{packageName}}.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = {{packageName}}.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = {{packageName}}.Utilities.ApiExceptionExtensionsFactory.ExtendedExceptionFactory;
         }
 
         /// <summary>
@@ -101,7 +102,7 @@ namespace {{packageName}}.{{apiPackage}}
         {
             this.Configuration = {{packageName}}.Client.Configuration.Default;
 
-            ExceptionFactory = {{packageName}}.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = {{packageName}}.Utilities.ApiExceptionExtensionsFactory.ExtendedExceptionFactory;
         }
 
         /// <summary>
@@ -117,7 +118,7 @@ namespace {{packageName}}.{{apiPackage}}
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = {{packageName}}.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = {{packageName}}.Utilities.ApiExceptionExtensionsFactory.ExtendedExceptionFactory;
         }
 
         /// <summary>
