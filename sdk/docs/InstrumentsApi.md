@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteInstrument**](InstrumentsApi.md#deleteinstrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Delete instrument
+[**DeleteInstrumentProperties**](InstrumentsApi.md#deleteinstrumentproperties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | [EXPERIMENTAL] Delete properties from an instrument
 [**GetInstrument**](InstrumentsApi.md#getinstrument) | **GET** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Get instrument
 [**GetInstrumentIdentifierTypes**](InstrumentsApi.md#getinstrumentidentifiertypes) | **GET** /api/instruments/identifierTypes | [EARLY ACCESS] Get instrument identifier types
 [**GetInstruments**](InstrumentsApi.md#getinstruments) | **POST** /api/instruments/$get | [EARLY ACCESS] Get instruments
@@ -88,6 +89,92 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The datetime that the instrument was deleted |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteInstrumentProperties
+
+> DeleteInstrumentPropertiesResponse DeleteInstrumentProperties (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null)
+
+[EXPERIMENTAL] Delete properties from an instrument
+
+Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+
+### Example
+
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using Lusid.Sdk.Api;
+using Lusid.Sdk.Client;
+using Lusid.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteInstrumentPropertiesExample
+    {
+        public static void Main()
+        {
+            Configuration.Default.BasePath = "http://localhost/api";
+            // Configure OAuth2 access token for authorization: oauth2
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new InstrumentsApi(Configuration.Default);
+            var identifierType = identifierType_example;  // string | The identifier type of the instrument, e.g., \"Figi\"
+            var identifier = identifier_example;  // string | The identifier of the instrument to delete properties from.
+            var propertyKeys = new List<string>(); // List<string> | The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.
+            var effectiveAt = effectiveAt_example;  // DateTimeOrCutLabel | The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional) 
+
+            try
+            {
+                // [EXPERIMENTAL] Delete properties from an instrument
+                DeleteInstrumentPropertiesResponse result = apiInstance.DeleteInstrumentProperties(identifierType, identifier, propertyKeys, effectiveAt);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Debug.Print("Exception when calling InstrumentsApi.DeleteInstrumentProperties: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **identifierType** | **string**| The identifier type of the instrument, e.g., \&quot;Figi\&quot; | 
+ **identifier** | **string**| The identifier of the instrument to delete properties from. | 
+ **propertyKeys** | [**List&lt;string&gt;**](string.md)| The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied. | 
+ **effectiveAt** | **DateTimeOrCutLabel**| The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. | [optional] 
+
+### Return type
+
+[**DeleteInstrumentPropertiesResponse**](DeleteInstrumentPropertiesResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The AsAt time of at which the properties were deleted |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

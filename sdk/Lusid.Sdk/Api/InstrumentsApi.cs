@@ -48,6 +48,33 @@ namespace Lusid.Sdk.Api
         /// <returns>ApiResponse of DeleteInstrumentResponse</returns>
         ApiResponse<DeleteInstrumentResponse> DeleteInstrumentWithHttpInfo (string identifierType, string identifier);
         /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument
+        /// </summary>
+        /// <remarks>
+        /// Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </remarks>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>DeleteInstrumentPropertiesResponse</returns>
+        DeleteInstrumentPropertiesResponse DeleteInstrumentProperties (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null);
+
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument
+        /// </summary>
+        /// <remarks>
+        /// Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </remarks>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>ApiResponse of DeleteInstrumentPropertiesResponse</returns>
+        ApiResponse<DeleteInstrumentPropertiesResponse> DeleteInstrumentPropertiesWithHttpInfo (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null);
+        /// <summary>
         /// [EARLY ACCESS] Get instrument
         /// </summary>
         /// <remarks>
@@ -251,6 +278,33 @@ namespace Lusid.Sdk.Api
         /// <param name="identifier">The value of the identifier that resolves to the instrument to delete.</param>
         /// <returns>Task of ApiResponse (DeleteInstrumentResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<DeleteInstrumentResponse>> DeleteInstrumentAsyncWithHttpInfo (string identifierType, string identifier);
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument
+        /// </summary>
+        /// <remarks>
+        /// Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </remarks>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>Task of DeleteInstrumentPropertiesResponse</returns>
+        System.Threading.Tasks.Task<DeleteInstrumentPropertiesResponse> DeleteInstrumentPropertiesAsync (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null);
+
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument
+        /// </summary>
+        /// <remarks>
+        /// Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </remarks>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>Task of ApiResponse (DeleteInstrumentPropertiesResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<DeleteInstrumentPropertiesResponse>> DeleteInstrumentPropertiesAsyncWithHttpInfo (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null);
         /// <summary>
         /// [EARLY ACCESS] Get instrument
         /// </summary>
@@ -708,6 +762,207 @@ namespace Lusid.Sdk.Api
             return new ApiResponse<DeleteInstrumentResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DeleteInstrumentResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DeleteInstrumentResponse)));
+        }
+
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </summary>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>DeleteInstrumentPropertiesResponse</returns>
+        public DeleteInstrumentPropertiesResponse DeleteInstrumentProperties (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null)
+        {
+             ApiResponse<DeleteInstrumentPropertiesResponse> localVarResponse = DeleteInstrumentPropertiesWithHttpInfo(identifierType, identifier, propertyKeys, effectiveAt);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </summary>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>ApiResponse of DeleteInstrumentPropertiesResponse</returns>
+        public ApiResponse< DeleteInstrumentPropertiesResponse > DeleteInstrumentPropertiesWithHttpInfo (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null)
+        {
+            // verify the required parameter 'identifierType' is set
+            if (identifierType == null)
+                throw new ApiException(400, "Missing required parameter 'identifierType' when calling InstrumentsApi->DeleteInstrumentProperties");
+            // verify the required parameter 'identifier' is set
+            if (identifier == null)
+                throw new ApiException(400, "Missing required parameter 'identifier' when calling InstrumentsApi->DeleteInstrumentProperties");
+            // verify the required parameter 'propertyKeys' is set
+            if (propertyKeys == null)
+                throw new ApiException(400, "Missing required parameter 'propertyKeys' when calling InstrumentsApi->DeleteInstrumentProperties");
+
+            var localVarPath = "./api/instruments/{identifierType}/{identifier}/properties/$delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (identifierType != null) localVarPathParams.Add("identifierType", this.Configuration.ApiClient.ParameterToString(identifierType)); // path parameter
+            if (identifier != null) localVarPathParams.Add("identifier", this.Configuration.ApiClient.ParameterToString(identifier)); // path parameter
+            if (effectiveAt != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "effectiveAt", effectiveAt)); // query parameter
+            if (propertyKeys != null && propertyKeys.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(propertyKeys); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = propertyKeys; // byte array
+            }
+
+            // authentication (oauth2) required
+            // oauth required
+            if (!String.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarHeaderParams["Authorization"] = "Bearer " + this.Configuration.AccessToken;
+            }
+
+            //  set the LUSID header
+            localVarHeaderParams["X-LUSID-SDK-Language"] = "C#";
+            localVarHeaderParams["X-LUSID-SDK-Version"] = "0.10.682";
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteInstrumentProperties", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<DeleteInstrumentPropertiesResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DeleteInstrumentPropertiesResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DeleteInstrumentPropertiesResponse)));
+        }
+
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </summary>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>Task of DeleteInstrumentPropertiesResponse</returns>
+        public async System.Threading.Tasks.Task<DeleteInstrumentPropertiesResponse> DeleteInstrumentPropertiesAsync (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null)
+        {
+             ApiResponse<DeleteInstrumentPropertiesResponse> localVarResponse = await DeleteInstrumentPropertiesAsyncWithHttpInfo(identifierType, identifier, propertyKeys, effectiveAt);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// [EXPERIMENTAL] Delete properties from an instrument Delete a collection of property values from an instrument, optionally, at the specified effective date, returning a  Finbourne.WebApi.Interface.Dto.Instruments.DeleteInstrumentPropertiesResponse value, containing the AsAtTime at which the operation was completed.
+        /// </summary>
+        /// <exception cref="Lusid.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="identifierType">The identifier type of the instrument, e.g., \&quot;Figi\&quot;</param>
+        /// <param name="identifier">The identifier of the instrument to delete properties from.</param>
+        /// <param name="propertyKeys">The property keys of the properties to be deleted from the instrument. Only properties in the  Finbourne.Entities.PropertyDomain.Instrument domain can be supplied.</param>
+        /// <param name="effectiveAt">The effective date to delete the properties from. Note that this is only valid to set if the properties being deleted  are defined to be Finbourne.Entities.PropertyLifeTime.TimeVariant, otherwise this value must not be set. (optional)</param>
+        /// <returns>Task of ApiResponse (DeleteInstrumentPropertiesResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<DeleteInstrumentPropertiesResponse>> DeleteInstrumentPropertiesAsyncWithHttpInfo (string identifierType, string identifier, List<string> propertyKeys, DateTimeOrCutLabel effectiveAt = null)
+        {
+            // verify the required parameter 'identifierType' is set
+            if (identifierType == null)
+                throw new ApiException(400, "Missing required parameter 'identifierType' when calling InstrumentsApi->DeleteInstrumentProperties");
+            // verify the required parameter 'identifier' is set
+            if (identifier == null)
+                throw new ApiException(400, "Missing required parameter 'identifier' when calling InstrumentsApi->DeleteInstrumentProperties");
+            // verify the required parameter 'propertyKeys' is set
+            if (propertyKeys == null)
+                throw new ApiException(400, "Missing required parameter 'propertyKeys' when calling InstrumentsApi->DeleteInstrumentProperties");
+
+            var localVarPath = "./api/instruments/{identifierType}/{identifier}/properties/$delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (identifierType != null) localVarPathParams.Add("identifierType", this.Configuration.ApiClient.ParameterToString(identifierType)); // path parameter
+            if (identifier != null) localVarPathParams.Add("identifier", this.Configuration.ApiClient.ParameterToString(identifier)); // path parameter
+            if (effectiveAt != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "effectiveAt", effectiveAt)); // query parameter
+            if (propertyKeys != null && propertyKeys.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(propertyKeys); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = propertyKeys; // byte array
+            }
+
+            // authentication (oauth2) required
+            // oauth required
+            if (!String.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarHeaderParams["Authorization"] = "Bearer " + this.Configuration.AccessToken;
+            }
+
+            //  set the LUSID header
+            localVarHeaderParams["X-LUSID-Sdk-Language"] = "C#";
+            localVarHeaderParams["X-LUSID-Sdk-Version"] = "0.10.682";
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteInstrumentProperties", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<DeleteInstrumentPropertiesResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DeleteInstrumentPropertiesResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DeleteInstrumentPropertiesResponse)));
         }
 
         /// <summary>
