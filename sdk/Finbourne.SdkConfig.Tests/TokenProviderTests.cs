@@ -1,30 +1,27 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Lusid.Sdk.Utilities;
-using Microsoft.Extensions.Configuration;
-using Moq;
+using Finbourne.SdkConfig.TokenProvider;
 using NUnit.Framework;
 
-namespace Lusid.Sdk.Tests
+namespace Finbourne.SdkConfig.Tests
 {
+    /// <summary>
+    ///  These tests require a local secrets.json file in the same directory, or the appropriate environment variables defined
+    /// </summary>
     public class TokenProviderTests
     {
         private static ApiConfiguration GetConfig()
         {
-            var apiConfig = new ApiConfiguration();
-
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("secrets.json")
-                .Build();
-                
-            config.GetSection("api").Bind(apiConfig);
-
+            var apiConfig = ApiConfigurationBuilder.Build(
+                Path.Combine(
+                    TestContext.CurrentContext.TestDirectory.Replace("Finbourne.TokenProviders.Tests", "Lusid.Sdk.Tests"),
+                    "secrets.json"));
+            
             return apiConfig;
         }
 
-        [Test, Explicit("Needs to have secrets populated in DefaultConfig")]
+        [Test]
         public async Task CanGetToken()
         {
             // GIVEN a token provider initialised with required secrets
@@ -37,7 +34,7 @@ namespace Lusid.Sdk.Tests
             Assert.That(token, Is.Not.Empty);
         }
 
-        [Test, Explicit("Needs to have secrets.json file containing user with offline-access enabled")]
+        [Test]
         public async Task CanRefreshWithRefreshToken()
         {
             // GIVEN a token from the TokenProvider that contains a refresh token
@@ -79,27 +76,6 @@ namespace Lusid.Sdk.Tests
             // THEN it should be populated, and the ExpiresOn should be in the future
             Assert.That(refreshedToken, Is.Not.Empty);
             Assert.That(provider.GetLastToken().ExpiresOn, Is.GreaterThan(DateTimeOffset.UtcNow));
-        }
-
-        [Test]
-        public void CanUseTokenProviderConfiguration()
-        {
-            var mockTokenProvider = new Mock<ITokenProvider>(MockBehavior.Loose);  // Don't care about the response
-
-            // GIVEN a TokenProviderConfiguration configured with a mock TokenProvider
-            TokenProviderConfiguration config = new TokenProviderConfiguration(mockTokenProvider.Object);
-
-            // BEFORE the token is requested
-            // THEN TokenProvider should not have been called
-            mockTokenProvider.Verify(x => x.GetAuthenticationTokenAsync(), Times.Never);
-
-            // WHEN the token is requested
-            // THEN TokenProvider should not have been called each time
-            var _ = config.AccessToken;
-            mockTokenProvider.Verify(x => x.GetAuthenticationTokenAsync(), Times.Once);
-
-            var __ = config.AccessToken;
-            mockTokenProvider.Verify(x => x.GetAuthenticationTokenAsync(), Times.Exactly(2));
         }
     }
 }

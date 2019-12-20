@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Finbourne.SdkConfig;
+using Finbourne.SdkConfig.TokenProvider;
 using Lusid.Sdk.Client;
 
 namespace Lusid.Sdk.Utilities
@@ -27,24 +29,14 @@ namespace Lusid.Sdk.Utilities
         /// </summary>
         public LusidApiFactory(ApiConfiguration apiConfiguration)
         {
-            if (apiConfiguration == null) throw new ArgumentNullException(nameof(apiConfiguration));
-            
-            // Validate Uris
-            if (!Uri.TryCreate(apiConfiguration.TokenUrl, UriKind.Absolute, out var _))
-            {
-                throw new UriFormatException($"Invalid Token Uri: {apiConfiguration.TokenUrl}");
-            }
-
-            if (!Uri.TryCreate(apiConfiguration.ApiUrl, UriKind.Absolute, out var _))
-            {
-                throw new UriFormatException($"Invalid LUSID Uri: {apiConfiguration.ApiUrl}");
-            }
+            // LUSID specifics
+            apiConfiguration.Scope = "openid client groups offline_access";
 
             // Create configuration
             var tokenProvider = new ClientCredentialsFlowTokenProvider(apiConfiguration);
             var configuration = new TokenProviderConfiguration(tokenProvider)
             {
-                BasePath = apiConfiguration.ApiUrl,
+                BasePath = apiConfiguration.ApiUrl.AbsoluteUri
             };
             
             configuration.AddDefaultHeader("X-LUSID-Application", apiConfiguration.ApplicationName);

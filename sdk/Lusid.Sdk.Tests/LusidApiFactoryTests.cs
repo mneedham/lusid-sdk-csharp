@@ -1,13 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using Finbourne.SdkConfig;
 using Lusid.Sdk.Api;
 using Lusid.Sdk.Client;
 using Lusid.Sdk.Model;
 using Lusid.Sdk.Utilities;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Lusid.Sdk.Tests
@@ -20,7 +17,7 @@ namespace Lusid.Sdk.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
-            _factory = LusidApiFactoryBuilder.Build("secrets.json");
+            _factory = new LusidApiFactory(ApiConfigurationBuilder.Build("secrets.json"));
         }
 
         [Test]
@@ -75,34 +72,6 @@ namespace Lusid.Sdk.Tests
             Assert.That(api, Is.Not.Null);
             Assert.That(api, Is.InstanceOf<TransactionPortfoliosApi>());
         }
-        
-        [Test]
-        public void InvalidTokenUrl_ThrowsException()
-        {
-            ApiConfiguration apiConfig = new ApiConfiguration
-            {
-                TokenUrl = "xyz"
-            };
-
-            Assert.That(
-                () => new LusidApiFactory(apiConfig),
-                Throws.InstanceOf<UriFormatException>().With.Message.EqualTo("Invalid Token Uri: xyz"));
-        }
-
-        [Test]
-        public void InvalidApiUrl_ThrowsException()
-        {
-            ApiConfiguration apiConfig = new ApiConfiguration
-            {
-                TokenUrl = "http://finbourne.com",
-                ApiUrl = "xyz"
-            };
-
-            Assert.That(
-                () => new LusidApiFactory(apiConfig),
-                Throws.InstanceOf<UriFormatException>().With.Message.EqualTo("Invalid LUSID Uri: xyz"));
-        }
-
 
         [Test]
         public void ApiException_Converts_To_ProblemDetails()

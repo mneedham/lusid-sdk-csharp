@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Finbourne.SdkConfig;
 using Lusid.Sdk.Api;
 using Lusid.Sdk.Client;
 using Lusid.Sdk.Model;
@@ -28,7 +29,7 @@ namespace Lusid.Sdk.Tests.Tutorials.MarketData
         [OneTimeSetUp]
         public void SetUp()
         {
-            _apiFactory = LusidApiFactoryBuilder.Build("secrets.json");
+            _apiFactory = new LusidApiFactory(ApiConfigurationBuilder.Build("secrets.json"));
             _instrumentsApi = _apiFactory.Api<IInstrumentsApi>();
 
             EnsurePropertyDefinition("CustomSector");

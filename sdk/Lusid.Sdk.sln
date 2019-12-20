@@ -1,10 +1,15 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lusid.Sdk", "Lusid.Sdk\Lusid.Sdk.csproj", "{A18E97D1-1621-43FF-87E4-C5C00FD2E516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lusid.Sdk", "Lusid.Sdk\Lusid.Sdk.csproj", "{A18E97D1-1621-43FF-87E4-C5C00FD2E516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lusid.Sdk.Tests", "Lusid.Sdk.Tests\Lusid.Sdk.Tests.csproj", "{529EE36E-F438-4EC0-8705-3341D3787505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lusid.Sdk.Tests", "Lusid.Sdk.Tests\Lusid.Sdk.Tests.csproj", "{529EE36E-F438-4EC0-8705-3341D3787505}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finbourne.SdkConfig", "Finbourne.SdkConfig\Finbourne.SdkConfig.csproj", "{6D9ED9A7-A100-452A-A888-06734F7E4BEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finbourne.SdkConfig.Tests", "Finbourne.SdkConfig.Tests\Finbourne.SdkConfig.Tests.csproj", "{5D91C238-4A8C-493F-875C-BECEC05A8E29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A18E97D1-1621-43FF-87E4-C5C00FD2E516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A18E97D1-1621-43FF-87E4-C5C00FD2E516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A18E97D1-1621-43FF-87E4-C5C00FD2E516}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -24,8 +25,19 @@ Global
 		{529EE36E-F438-4EC0-8705-3341D3787505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{529EE36E-F438-4EC0-8705-3341D3787505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{529EE36E-F438-4EC0-8705-3341D3787505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9ED9A7-A100-452A-A888-06734F7E4BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9ED9A7-A100-452A-A888-06734F7E4BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9ED9A7-A100-452A-A888-06734F7E4BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9ED9A7-A100-452A-A888-06734F7E4BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D91C238-4A8C-493F-875C-BECEC05A8E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D91C238-4A8C-493F-875C-BECEC05A8E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D91C238-4A8C-493F-875C-BECEC05A8E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D91C238-4A8C-493F-875C-BECEC05A8E29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0158BDF7-B8CB-49B8-AEC3-B63F2A50DB9C}
 	EndGlobalSection
 EndGlobal

@@ -16,6 +16,7 @@
     <None Include="secrets.json" CopyToOutputDirectory="Always" Condition="Exists('secrets.json')" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Finbourne.SdkConfig\Finbourne.SdkConfig.csproj" />
     <ProjectReference Include="..\Lusid.Sdk\Lusid.Sdk.csproj" />
   </ItemGroup>
 </Project>

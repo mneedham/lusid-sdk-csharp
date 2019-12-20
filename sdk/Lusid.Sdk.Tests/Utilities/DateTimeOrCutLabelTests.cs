@@ -13,8 +13,8 @@ namespace Lusid.Sdk.Tests.Utilities
             var parameterUsingConstructor = new DateTimeOrCutLabel(testDateTime);
             var parameterUsingConversion = (DateTimeOrCutLabel) testDateTime;
 
-            Assert.That(parameterUsingConstructor.Parameter, Is.EqualTo("2018-03-28T12:01:02.0030000+00:00"));
-            Assert.That(parameterUsingConversion.Parameter, Is.EqualTo("2018-03-28T12:01:02.0030000+00:00"));
+            Assert.That(parameterUsingConstructor.ToString(), Is.EqualTo("2018-03-28T12:01:02.0030000+00:00"));
+            Assert.That(parameterUsingConversion.ToString(), Is.EqualTo("2018-03-28T12:01:02.0030000+00:00"));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace Lusid.Sdk.Tests.Utilities
 
             var parameter = new DateTimeOrCutLabel(testDate, "ExampleCutLabel");
 
-            Assert.That(parameter.Parameter, Is.EqualTo("2018-03-28NExampleCutLabel"));
+            Assert.That(parameter.ToString(), Is.EqualTo("2018-03-28NExampleCutLabel"));
         }
 
 
@@ -47,7 +47,7 @@ namespace Lusid.Sdk.Tests.Utilities
 
             var parameterUsingConversion = (DateTimeOrCutLabel) testValue;
 
-            Assert.That(parameterUsingConversion.Parameter, Is.EqualTo(testValue));
+            Assert.That(parameterUsingConversion.ToString(), Is.EqualTo(testValue));
         }
 
         [Test]

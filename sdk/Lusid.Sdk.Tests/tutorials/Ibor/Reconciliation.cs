@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Finbourne.SdkConfig;
 using Lusid.Sdk.Api;
 using Lusid.Sdk.Model;
 using Lusid.Sdk.Tests.Utilities;
@@ -20,7 +21,7 @@ namespace Lusid.Sdk.Tests.Tutorials.Ibor
         [OneTimeSetUp]
         public void SetUp()
         {
-            _apiFactory = LusidApiFactoryBuilder.Build("secrets.json");
+            _apiFactory = new LusidApiFactory(ApiConfigurationBuilder.Build("secrets.json"));
             
             _instrumentLoader = new InstrumentLoader(_apiFactory);
             _instrumentIds = _instrumentLoader.LoadInstruments();

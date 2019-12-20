@@ -6,54 +6,25 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-[assembly: InternalsVisibleTo("Lusid.Sdk.Tests")]
-
-namespace Lusid.Sdk.Utilities
+[assembly: InternalsVisibleTo("Finbourne.SdkConfig.Tests")]
+namespace Finbourne.SdkConfig.TokenProvider
 {
-    /// <summary>
-    /// Interface for an implementation to return access tokens
-    /// </summary>
-    public interface ITokenProvider
-    {
-        /// <summary>
-        /// Return an access token
-        /// </summary>
-        Task<string> GetAuthenticationTokenAsync();
-
-        /// <summary>
-        /// Return an access token
-        /// </summary>
-        Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync();
-    }
-
     /// <summary>
     /// Implementation of a TokenProvider for the ClientCredentialsFlow - where the credentials are usually sourced from a "secrets.json" file 
     /// </summary>
     public class ClientCredentialsFlowTokenProvider : ITokenProvider
     {
-        private readonly ApiConfiguration _apiConfig;
+        private readonly ITokenProviderParameters _apiConfig;
 
-        internal class AuthenticationToken
-        {
-            public AuthenticationToken(string token, DateTimeOffset expiresOn, string refreshToken)
-            {
-                Token = token;
-                ExpiresOn = expiresOn;
-                RefreshToken = refreshToken;
-            }
-            public string Token { get; }
-            public DateTimeOffset ExpiresOn { get; internal set; }
-            public string RefreshToken { get; }
-        }
-
-        
         private AuthenticationToken _lastIssuedToken;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ClientCredentialsFlowTokenProvider(ApiConfiguration configuration)
+        public ClientCredentialsFlowTokenProvider(ITokenProviderParameters configuration)
         {
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            
             _apiConfig = configuration;
         }
 
@@ -85,7 +56,7 @@ namespace Lusid.Sdk.Utilities
         /// <summary>
         /// Get a new token from Okta
         /// </summary>
-        private static async Task<AuthenticationToken> GetNewToken(ApiConfiguration apiConfig)
+        private static async Task<AuthenticationToken> GetNewToken(ITokenProviderParameters apiConfig)
         {
             using (var httpClient = new HttpClient())
             {
@@ -101,7 +72,15 @@ namespace Lusid.Sdk.Utilities
                 parameters["password"] = apiConfig.Password;
                 parameters["client_id"] = apiConfig.ClientId;
                 parameters["client_secret"] = apiConfig.ClientSecret;
-                parameters["scope"] = "openid client groups offline_access";
+                parameters["scope"] = apiConfig.Scope;
+
+                if (apiConfig.AdditionalParameters != null)
+                {
+                    foreach (var kvp in apiConfig.AdditionalParameters)
+                    {
+                        parameters[kvp.Key] = kvp.Value;
+                    }
+                }
 
                 var tokenRequest =
                     new HttpRequestMessage(HttpMethod.Post, apiConfig.TokenUrl)
@@ -147,7 +126,7 @@ namespace Lusid.Sdk.Utilities
         /// <summary>
         /// Assuming we already have a token, then refresh it
         /// </summary>
-        private static async Task<AuthenticationToken> RefreshToken(ApiConfiguration apiConfig, string refreshToken)
+        private static async Task<AuthenticationToken> RefreshToken(ITokenProviderParameters apiConfig, string refreshToken)
         {
             using (var httpClient = new HttpClient())
             {
@@ -210,7 +189,10 @@ namespace Lusid.Sdk.Utilities
             return Convert.ToBase64String(plainTextBytes);
         }
 
-        internal AuthenticationToken GetLastToken()
+        /// <summary>
+        /// Returns the most recently issued token
+        /// </summary>
+        public AuthenticationToken GetLastToken()
         {
             return _lastIssuedToken;
         }
