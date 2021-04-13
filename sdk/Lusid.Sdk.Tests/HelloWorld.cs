@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+// tag::lusid-imports[]
 using Lusid.Sdk.Api;
 using Lusid.Sdk.Model;
 using Lusid.Sdk.Utilities;
+// tag::lusid-imports[]
 
 namespace FinbourneCSharpDemo
 {
@@ -12,8 +14,10 @@ namespace FinbourneCSharpDemo
     {
         static void Main(string[] args)
         {
+            // tag::create-client-factory[]
             var secretsFile = "/path/to/secrets.json";
             var apiFactory = LusidApiFactoryBuilder.Build(secretsFile);
+            // end::create-client-factory[]
 
             var txPortoliosApi = apiFactory.Api<ITransactionPortfoliosApi>();
 
