@@ -19,8 +19,11 @@ namespace FinbourneCSharpDemo
             var apiFactory = LusidApiFactoryBuilder.Build(secretsFile);
             // end::create-client-factory[]
 
+            // tag::create-tx-portfolios-api[]
             var txPortoliosApi = apiFactory.Api<ITransactionPortfoliosApi>();
+            // end::create-tx-portfolios-api[]
 
+            // tag::create-portfolio[]
             var scope = "GettingStartedScope";
             var uuid = Guid.NewGuid().ToString();
             var portfolioRequest = new CreateTransactionPortfolioRequest(
@@ -32,7 +35,9 @@ namespace FinbourneCSharpDemo
             var portfolio = txPortoliosApi.CreatePortfolio(scope, portfolioRequest);
             var portfolioCode = portfolio.Id.Code;
             System.Console.WriteLine($"Portfolio Code: {portfolioCode}");
+            // end::create-portfolio[]
 
+            // tag::upsert-instruments[]
             var instrumentsApi = apiFactory.Api<IInstrumentsApi>();
             var figsiToCreate = new Dictionary<string, InstrumentDefinition> {
                 ["BBG000C6K6G9"] =  new InstrumentDefinition(
@@ -40,11 +45,15 @@ namespace FinbourneCSharpDemo
                     identifiers: new Dictionary<string, InstrumentIdValue>  { ["Figi"] = new InstrumentIdValue(value: "BBG000C6K6G9")})
             };
             instrumentsApi.UpsertInstruments(figsiToCreate);
+            // end::upsert-instruments[]
 
+            // tag::get-instruments[]
             var instrumentsResponse = instrumentsApi.GetInstruments(identifierType: "Figi", requestBody: figsiToCreate.Keys.ToList());
             var luidToName = instrumentsResponse.Values.ToDictionary(value => value.Value.LusidInstrumentId, value => value.Value.Name);
             var nameToLuid = instrumentsResponse.Values.ToDictionary(value => value.Value.Name, value => value.Value.LusidInstrumentId);
+            // end::get-instruments[]
 
+            // tag::upsert-transactions[]
             var transactions = new List<TransactionRequest>() {
                 new TransactionRequest(
                     transactionId: Guid.NewGuid().ToString(),
@@ -63,12 +72,15 @@ namespace FinbourneCSharpDemo
             };
 
             txPortoliosApi.UpsertTransactions(scope: scope, code: portfolioCode, transactionRequest: transactions);
+            // end::upsert-transactions[]
 
+            // tag::get-holdings[]
             var holdingsResponse = txPortoliosApi.GetHoldings(scope: scope, code: portfolioCode, propertyKeys: new List<String>() { "Instrument/default/Name"});
             foreach(var holding in holdingsResponse.Values)
             {
                 System.Console.WriteLine($"{luidToName[holding.InstrumentUid]}, {holding.Units}, {holding.Cost.Amount}");
             }
+            // end::get-holdings[]
         }
     }
 }
