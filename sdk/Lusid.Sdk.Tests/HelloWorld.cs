@@ -6,7 +6,7 @@ using System.Linq;
 using Lusid.Sdk.Api;
 using Lusid.Sdk.Model;
 using Lusid.Sdk.Utilities;
-// tag::lusid-imports[]
+// end::lusid-imports[]
 
 namespace FinbourneCSharpDemo
 {
