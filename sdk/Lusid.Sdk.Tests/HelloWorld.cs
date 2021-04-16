@@ -1,11 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 // tag::lusid-imports[]
+// LUSID imports
 using Lusid.Sdk.Api;
 using Lusid.Sdk.Model;
 using Lusid.Sdk.Utilities;
+
+// Other imports
+using System;
+using System.Collections.Generic;
+using System.Linq;
 // end::lusid-imports[]
 
 namespace FinbourneCSharpDemo
